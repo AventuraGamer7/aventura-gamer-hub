@@ -84,11 +84,50 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-neon': {
+					'0%, 100%': {
+						textShadow: '0 0 10px hsl(var(--primary) / 0.8)'
+					},
+					'50%': {
+						textShadow: '0 0 20px hsl(var(--primary) / 1), 0 0 30px hsl(var(--primary) / 0.8)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0px)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
+				},
+				'shimmer': {
+					'0%': {
+						transform: 'translateX(-100%)'
+					},
+					'100%': {
+						transform: 'translateX(100%)'
+					}
+				},
+				'glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 20px hsl(var(--primary) / 0.5)'
+					},
+					'50%': {
+						boxShadow: '0 0 30px hsl(var(--primary) / 0.8), 0 0 40px hsl(var(--secondary) / 0.3)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-neon': 'pulse-neon 2s ease-in-out infinite alternate',
+				'float': 'float 3s ease-in-out infinite',
+				'shimmer': 'shimmer 2s infinite',
+				'glow': 'glow 2s ease-in-out infinite alternate'
+			},
+			fontFamily: {
+				'gaming': ['Inter', 'system-ui', 'sans-serif']
 			}
 		}
 	},
