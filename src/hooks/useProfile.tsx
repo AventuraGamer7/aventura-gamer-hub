@@ -52,16 +52,30 @@ export const useProfile = () => {
     fetchProfile();
   }, [user]);
 
-  const isAdmin = () => profile?.role === 'admin' || profile?.role === 'superadmin';
+  const isSuperadmin = () => profile?.role === 'superadmin';
+  const isAdmin = () => profile?.role === 'admin';
   const isManager = () => profile?.role === 'manager' || profile?.role === 'employee';
-  const canManageProducts = () => isAdmin() || isManager();
+  
+  // Admin can create and edit (no delete)
+  const canCreateContent = () => isAdmin() || isSuperadmin() || isManager();
+  const canEditContent = () => isAdmin() || isSuperadmin() || isManager();
+  
+  // Only superadmin can delete
+  const canDeleteContent = () => isSuperadmin();
+  
+  // Legacy function for backward compatibility
+  const canManageProducts = () => canCreateContent();
 
   return {
     profile,
     loading,
     error,
+    isSuperadmin,
     isAdmin,
     isManager,
+    canCreateContent,
+    canEditContent,
+    canDeleteContent,
     canManageProducts,
   };
 };

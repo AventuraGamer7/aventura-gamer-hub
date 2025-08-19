@@ -8,6 +8,8 @@ import { useToast } from '@/hooks/use-toast';
 import { useProfile } from '@/hooks/useProfile';
 import GamificationPanel from '@/components/GamificationPanel';
 import AddProductForm from '@/components/AddProductForm';
+import AddCourseForm from '@/components/AddCourseForm';
+import AddServiceForm from '@/components/AddServiceForm';
 import { 
   LogOut, 
   User, 
@@ -22,7 +24,7 @@ import {
 const Dashboard = () => {
   const { user, signOut } = useAuth();
   const { toast } = useToast();
-  const { profile, canManageProducts } = useProfile();
+  const { profile, canCreateContent, isSuperadmin, isAdmin } = useProfile();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -122,11 +124,12 @@ const Dashboard = () => {
                       <div>{user?.email}</div>
                       {profile && (
                         <div className="flex items-center gap-2">
-                          <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">
-                            {profile.role === 'admin' || profile.role === 'superadmin' ? 'Administrador' : 
-                             profile.role === 'manager' || profile.role === 'employee' ? 'Manager' : 
-                             'Cliente'}
-                          </span>
+                           <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">
+                             {profile.role === 'superadmin' ? 'Superadmin' :
+                              profile.role === 'admin' ? 'Admin' :
+                              profile.role === 'manager' || profile.role === 'employee' ? 'Manager' : 
+                              'Cliente'}
+                           </span>
                         </div>
                       )}
                     </CardDescription>
@@ -161,28 +164,63 @@ const Dashboard = () => {
               ))}
             </div>
 
-            {/* Admin/Manager Panel */}
-            {canManageProducts() && (
+            {/* Management Panel - Role-based access */}
+            {canCreateContent() && (
               <Card className="card-gaming border-secondary/20">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Trophy className="h-5 w-5 text-secondary" />
-                    Panel de Gestión
+                    Panel de Gestión {isSuperadmin() ? '(Superadmin)' : isAdmin() ? '(Admin)' : ''}
                   </CardTitle>
                   <CardDescription>
-                    Herramientas de administración disponibles
+                    {isSuperadmin() 
+                      ? 'Acceso completo: crear, editar y eliminar contenido'
+                      : 'Permisos limitados: crear y editar contenido (sin eliminación)'
+                    }
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <AddProductForm />
-                    <Button 
-                      variant="outline" 
-                      onClick={() => navigate('/tienda')}
-                      className="w-full"
-                    >
-                      Ver Productos en Tienda
-                    </Button>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <AddProductForm />
+                      <AddCourseForm />
+                      <AddServiceForm />
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                      <Button 
+                        variant="outline" 
+                        onClick={() => navigate('/tienda')}
+                        className="w-full"
+                      >
+                        Gestionar Productos
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        onClick={() => navigate('/cursos')}
+                        className="w-full"
+                      >
+                        Gestionar Cursos
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        onClick={() => navigate('/servicios')}
+                        className="w-full"
+                      >
+                        Gestionar Servicios
+                      </Button>
+                    </div>
+
+                    {isSuperadmin() && (
+                      <div className="pt-4 border-t border-border/20">
+                        <p className="text-sm text-destructive mb-2 font-medium">
+                          ⚠️ Opciones de Superadmin - Eliminar contenido
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          Como superadmin, puedes eliminar productos, cursos y servicios desde las secciones de gestión correspondientes.
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </Card>
