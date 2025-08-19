@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -6,6 +7,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import GamificationPanel from '@/components/GamificationPanel';
+import { useAuth } from '@/hooks/useAuth';
 import { 
   Wrench, 
   GraduationCap, 
@@ -29,6 +31,8 @@ import coursesImage from '@/assets/gaming-courses.jpg';
 import storeImage from '@/assets/gaming-store.jpg';
 
 const Index = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const services = [
     {
       title: 'Servicios Técnicos',
@@ -108,15 +112,31 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-              <Button variant="hero" size="xl" className="text-lg">
-                <Wrench className="mr-2 h-5 w-5" />
-                Reparar Mi Consola
-                <ChevronRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button variant="neon" size="xl" className="text-lg">
-                <GraduationCap className="mr-2 h-5 w-5" />
-                Ver Cursos
-              </Button>
+              {user ? (
+                <>
+                  <Button variant="hero" size="xl" className="text-lg" onClick={() => navigate('/dashboard')}>
+                    <Trophy className="mr-2 h-5 w-5" />
+                    Ir al Dashboard
+                    <ChevronRight className="ml-2 h-5 w-5" />
+                  </Button>
+                  <Button variant="neon" size="xl" className="text-lg" onClick={() => navigate('/servicios')}>
+                    <Wrench className="mr-2 h-5 w-5" />
+                    Ver Servicios
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="hero" size="xl" className="text-lg" onClick={() => navigate('/auth')}>
+                    <Wrench className="mr-2 h-5 w-5" />
+                    Iniciar Sesión
+                    <ChevronRight className="ml-2 h-5 w-5" />
+                  </Button>
+                  <Button variant="neon" size="xl" className="text-lg" onClick={() => navigate('/auth')}>
+                    <GraduationCap className="mr-2 h-5 w-5" />
+                    Crear Cuenta
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
