@@ -5,7 +5,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { useProfile } from '@/hooks/useProfile';
 import GamificationPanel from '@/components/GamificationPanel';
+import AddProductForm from '@/components/AddProductForm';
 import { 
   LogOut, 
   User, 
@@ -20,6 +22,7 @@ import {
 const Dashboard = () => {
   const { user, signOut } = useAuth();
   const { toast } = useToast();
+  const { profile, canManageProducts } = useProfile();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -115,8 +118,17 @@ const Dashboard = () => {
                     <CardTitle className="text-xl text-glow">
                       ¡Bienvenido, Aventurero!
                     </CardTitle>
-                    <CardDescription>
-                      {user?.email}
+                    <CardDescription className="space-y-1">
+                      <div>{user?.email}</div>
+                      {profile && (
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">
+                            {profile.role === 'admin' || profile.role === 'superadmin' ? 'Administrador' : 
+                             profile.role === 'manager' || profile.role === 'employee' ? 'Manager' : 
+                             'Cliente'}
+                          </span>
+                        </div>
+                      )}
                     </CardDescription>
                   </div>
                 </div>
@@ -148,6 +160,33 @@ const Dashboard = () => {
                 </Card>
               ))}
             </div>
+
+            {/* Admin/Manager Panel */}
+            {canManageProducts() && (
+              <Card className="card-gaming border-secondary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Trophy className="h-5 w-5 text-secondary" />
+                    Panel de Gestión
+                  </CardTitle>
+                  <CardDescription>
+                    Herramientas de administración disponibles
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <AddProductForm />
+                    <Button 
+                      variant="outline" 
+                      onClick={() => navigate('/tienda')}
+                      className="w-full"
+                    >
+                      Ver Productos en Tienda
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
             {/* Recent Activity */}
             <Card className="card-gaming border-primary/20">

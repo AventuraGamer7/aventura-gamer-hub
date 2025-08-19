@@ -3,9 +3,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Skeleton } from '@/components/ui/skeleton';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
+import { useProducts } from '@/hooks/useProducts';
 import { 
   ShoppingCart, 
   Star, 
@@ -21,89 +23,16 @@ import {
 
 const Tienda = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [selectedCategory, setSelectedCategory] = useState('Todos');
+  const { products, loading, error } = useProducts();
 
-  const products = [
-    {
-      id: 1,
-      name: 'Joystick DualSense PS5',
-      category: 'Controles',
-      price: 280000,
-      originalPrice: 320000,
-      image: '/api/placeholder/300/300',
-      rating: 4.8,
-      reviews: 156,
-      inStock: true,
-      isOriginal: true,
-      description: 'Control original Sony DualSense para PlayStation 5 con tecnología háptica avanzada.'
-    },
-    {
-      id: 2,
-      name: 'Sticks Analógicos PS4',
-      category: 'Repuestos',
-      price: 25000,
-      originalPrice: 35000,
-      image: '/api/placeholder/300/300',
-      rating: 4.6,
-      reviews: 89,
-      inStock: true,
-      isOriginal: true,
-      description: 'Sticks analógicos originales para controles DualShock 4 de PlayStation 4.'
-    },
-    {
-      id: 3,
-      name: 'Pantalla Nintendo Switch',
-      category: 'Repuestos',
-      price: 180000,
-      originalPrice: 220000,
-      image: '/api/placeholder/300/300',
-      rating: 4.9,
-      reviews: 67,
-      inStock: true,
-      isOriginal: true,
-      description: 'Pantalla LCD original de reemplazo para Nintendo Switch con touch funcional.'
-    },
-    {
-      id: 4,
-      name: 'Xbox Series X Console',
-      category: 'Consolas',
-      price: 2400000,
-      originalPrice: 2800000,
-      image: '/api/placeholder/300/300',
-      rating: 4.9,
-      reviews: 234,
-      inStock: false,
-      isOriginal: true,
-      description: 'Consola Xbox Series X nueva, sellada con garantía oficial Microsoft.'
-    },
-    {
-      id: 5,
-      name: 'Botones Direccionales PS5',
-      category: 'Repuestos',
-      price: 15000,
-      originalPrice: 20000,
-      image: '/api/placeholder/300/300',
-      rating: 4.5,
-      reviews: 43,
-      inStock: true,
-      isOriginal: true,
-      description: 'Set completo de botones direccionales originales para DualSense PS5.'
-    },
-    {
-      id: 6,
-      name: 'Joy-Con Nintendo Switch',
-      category: 'Controles',
-      price: 320000,
-      originalPrice: 380000,
-      image: '/api/placeholder/300/300',
-      rating: 4.7,
-      reviews: 112,
-      inStock: true,
-      isOriginal: true,
-      description: 'Par de Joy-Con originales Nintendo en colores neón azul y rojo.'
-    }
-  ];
+  // Get unique categories from products
+  const categories = ['Todos', ...Array.from(new Set(products.map(p => p.category).filter(Boolean)))];
 
-  const categories = ['Todos', 'Consolas', 'Controles', 'Repuestos', 'Accesorios'];
+  // Filter products by category
+  const filteredProducts = selectedCategory === 'Todos' 
+    ? products 
+    : products.filter(p => p.category === selectedCategory);
 
   const wholesaleFeatures = [
     'Precios especiales mayoristas',
@@ -126,37 +55,32 @@ const Tienda = () => {
     <Card className="card-gaming border-primary/20 overflow-hidden glow-hover group">
       <div className="relative">
         <img 
-          src={product.image} 
+          src={product.image || '/api/placeholder/300/300'} 
           alt={product.name}
           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        {!product.inStock && (
+        {product.stock === 0 && (
           <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
             <Badge variant="destructive">Agotado</Badge>
           </div>
         )}
-        {product.isOriginal && (
-          <Badge className="absolute top-2 left-2 bg-primary/90">Original</Badge>
-        )}
-        {product.originalPrice > product.price && (
-          <Badge variant="destructive" className="absolute top-2 right-2">
-            -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
-          </Badge>
-        )}
+        <Badge className="absolute top-2 left-2 bg-primary/90">Original</Badge>
       </div>
       
       <CardHeader className="space-y-2">
         <div className="flex items-start justify-between">
-          <Badge variant="secondary" className="text-xs">{product.category}</Badge>
+          <Badge variant="secondary" className="text-xs">
+            {product.category || 'General'}
+          </Badge>
           <div className="flex items-center gap-1 text-sm">
             <Star className="h-4 w-4 fill-current text-yellow-500" />
-            {product.rating}
-            <span className="text-muted-foreground">({product.reviews})</span>
+            4.8
+            <span className="text-muted-foreground">(156)</span>
           </div>
         </div>
         <CardTitle className="text-lg text-neon">{product.name}</CardTitle>
         <CardDescription className="text-sm text-muted-foreground">
-          {product.description}
+          {product.description || 'Sin descripción disponible'}
         </CardDescription>
       </CardHeader>
       
@@ -164,22 +88,22 @@ const Tienda = () => {
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <span className="text-2xl font-bold text-primary">{formatPrice(product.price)}</span>
-            {product.originalPrice > product.price && (
-              <span className="text-sm text-muted-foreground line-through">
-                {formatPrice(product.originalPrice)}
-              </span>
-            )}
           </div>
+          {product.stock > 0 && (
+            <p className="text-xs text-muted-foreground">
+              {product.stock} unidades disponibles
+            </p>
+          )}
         </div>
         
         <div className="flex gap-2">
           <Button 
             variant="gaming" 
             className="flex-1" 
-            disabled={!product.inStock}
+            disabled={product.stock === 0}
           >
             <ShoppingCart className="mr-2 h-4 w-4" />
-            {product.inStock ? 'Agregar' : 'Agotado'}
+            {product.stock > 0 ? 'Agregar' : 'Agotado'}
           </Button>
         </div>
       </CardContent>
@@ -266,9 +190,9 @@ const Tienda = () => {
         <div className="container mx-auto px-4">
           {/* Filters and Controls */}
           <div className="flex flex-col lg:flex-row gap-4 mb-8 items-center justify-between">
-            <Tabs defaultValue="Todos" className="w-full lg:w-auto">
-              <TabsList className="grid w-full grid-cols-5 lg:w-auto">
-                {categories.map((category) => (
+            <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full lg:w-auto">
+              <TabsList className="grid w-full lg:w-auto" style={{ gridTemplateColumns: `repeat(${Math.min(categories.length, 5)}, 1fr)` }}>
+                {categories.slice(0, 5).map((category) => (
                   <TabsTrigger key={category} value={category} className="text-xs">
                     {category}
                   </TabsTrigger>
@@ -295,15 +219,50 @@ const Tienda = () => {
           </div>
 
           {/* Products Grid */}
-          <div className={`grid gap-6 ${
-            viewMode === 'grid' 
-              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
-              : 'grid-cols-1'
-          }`}>
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {loading ? (
+            <div className={`grid gap-6 ${
+              viewMode === 'grid' 
+                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
+                : 'grid-cols-1'
+            }`}>
+              {Array.from({ length: 6 }).map((_, i) => (
+                <Card key={i} className="overflow-hidden">
+                  <Skeleton className="w-full h-48" />
+                  <CardHeader>
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-3 w-1/2" />
+                  </CardHeader>
+                  <CardContent>
+                    <Skeleton className="h-6 w-1/3 mb-2" />
+                    <Skeleton className="h-8 w-full" />
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : error ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">Error al cargar productos: {error}</p>
+            </div>
+          ) : filteredProducts.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">
+                {products.length === 0 
+                  ? 'No hay productos disponibles en este momento.' 
+                  : `No se encontraron productos en la categoría "${selectedCategory}".`
+                }
+              </p>
+            </div>
+          ) : (
+            <div className={`grid gap-6 ${
+              viewMode === 'grid' 
+                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
+                : 'grid-cols-1'
+            }`}>
+              {filteredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
