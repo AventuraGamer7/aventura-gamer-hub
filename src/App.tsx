@@ -35,46 +35,11 @@ const App = () => (
                 </ProtectedRoute>
               } 
             />
-            <Route 
-              path="/servicios" 
-              element={
-                <ProtectedRoute>
-                  <Servicios />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/cursos" 
-              element={
-                <ProtectedRoute>
-                  <Cursos />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/tienda" 
-              element={
-                <ProtectedRoute>
-                  <Tienda />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/blog" 
-              element={
-                <ProtectedRoute>
-                  <Blog />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/contacto" 
-              element={
-                <ProtectedRoute>
-                  <Contacto />
-                </ProtectedRoute>
-              } 
-            />
+            <Route path="/servicios" element={<Servicios />} />
+            <Route path="/cursos" element={<Cursos />} />
+            <Route path="/tienda" element={<Tienda />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/contacto" element={<Contacto />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
