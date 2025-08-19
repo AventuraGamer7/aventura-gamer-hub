@@ -189,6 +189,19 @@ All colors MUST be HSL for consistency.
     box-shadow: var(--shadow-secondary);
   }
 
+  /* Missing shadow classes */
+  .shadow-glow {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6), 0 0 80px hsl(var(--secondary) / 0.3);
+  }
+
+  .hover\:shadow-glow:hover {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6), 0 0 80px hsl(var(--secondary) / 0.3);
+  }
+
+  .hover\:shadow-neon:hover {
+    box-shadow: var(--shadow-neon);
+  }
+
   /* Experience Bar */
   .xp-bar {
     background: hsl(var(--muted));
@@ -241,4 +254,22 @@ All colors MUST be HSL for consistency.
   100% {
     transform: translateX(100%);
   }
+}
+
+/* Missing animations used in components */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.8), 0 0 40px hsl(var(--secondary) / 0.3);
+  }
+}
+
+.animate-pulse-neon {
+  animation: pulse-neon 2s ease-in-out infinite alternate;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
 }
