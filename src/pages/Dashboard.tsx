@@ -10,6 +10,7 @@ import GamificationPanel from '@/components/GamificationPanel';
 import AddProductForm from '@/components/AddProductForm';
 import AddCourseForm from '@/components/AddCourseForm';
 import AddServiceForm from '@/components/AddServiceForm';
+import ManagementPanel from '@/components/ManagementPanel';
 import { 
   LogOut, 
   User, 
@@ -193,21 +194,21 @@ const Dashboard = () => {
                         onClick={() => navigate('/tienda')}
                         className="w-full"
                       >
-                        Gestionar Productos
+                        Ver Tienda
                       </Button>
                       <Button 
                         variant="outline" 
                         onClick={() => navigate('/cursos')}
                         className="w-full"
                       >
-                        Gestionar Cursos
+                        Ver Cursos
                       </Button>
                       <Button 
                         variant="outline" 
                         onClick={() => navigate('/servicios')}
                         className="w-full"
                       >
-                        Gestionar Servicios
+                        Ver Servicios
                       </Button>
                     </div>
 
@@ -217,13 +218,22 @@ const Dashboard = () => {
                           ⚠️ Opciones de Superadmin - Eliminar contenido
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          Como superadmin, puedes eliminar productos, cursos y servicios desde las secciones de gestión correspondientes.
+                          Como superadmin, puedes eliminar productos, cursos y servicios desde los paneles de gestión a continuación.
                         </p>
                       </div>
                     )}
                   </div>
                 </CardContent>
               </Card>
+            )}
+
+            {/* Management Panels */}
+            {canCreateContent() && (
+              <div className="space-y-6">
+                <ManagementPanel type="products" />
+                <ManagementPanel type="courses" />
+                <ManagementPanel type="services" />
+              </div>
             )}
 
             {/* Recent Activity */}
