@@ -112,31 +112,15 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-              {user ? (
-                <>
-                  <Button variant="hero" size="xl" className="text-lg" onClick={() => navigate('/dashboard')}>
-                    <Trophy className="mr-2 h-5 w-5" />
-                    Ir al Dashboard
-                    <ChevronRight className="ml-2 h-5 w-5" />
-                  </Button>
-                  <Button variant="neon" size="xl" className="text-lg" onClick={() => navigate('/servicios')}>
-                    <Wrench className="mr-2 h-5 w-5" />
-                    Ver Servicios
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button variant="hero" size="xl" className="text-lg" onClick={() => navigate('/auth')}>
-                    <Wrench className="mr-2 h-5 w-5" />
-                    Iniciar Sesión
-                    <ChevronRight className="ml-2 h-5 w-5" />
-                  </Button>
-                  <Button variant="neon" size="xl" className="text-lg" onClick={() => navigate('/auth')}>
-                    <GraduationCap className="mr-2 h-5 w-5" />
-                    Crear Cuenta
-                  </Button>
-                </>
-              )}
+              <Button variant="hero" size="xl" className="text-lg" onClick={() => navigate('/servicios')}>
+                <Wrench className="mr-2 h-5 w-5" />
+                Ver Servicios
+                <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button variant="neon" size="xl" className="text-lg" onClick={() => navigate('/dashboard')}>
+                <GraduationCap className="mr-2 h-5 w-5" />
+                Dashboard
+              </Button>
             </div>
           </div>
         </div>
@@ -206,7 +190,11 @@ const Index = () => {
                     ))}
                   </ul>
                   
-                  <Button variant={service.ctaVariant} className="w-full">
+                  <Button variant={service.ctaVariant} className="w-full" onClick={() => {
+                    if (service.title === 'Servicios Técnicos') navigate('/servicios');
+                    else if (service.title === 'Cursos Especializados') navigate('/cursos');
+                    else if (service.title === 'Tienda de Repuestos') navigate('/tienda');
+                  }}>
                     {service.cta}
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
