@@ -126,7 +126,17 @@ const Index = () => {
         {/* Floating Stats */}
         <div className="relative container mx-auto px-4 mt-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {stats.map((stat, index) => {})}
+            {stats.map((stat, index) => (
+              <Card key={index} className="card-gaming border-primary/20 bg-card/50 backdrop-blur-sm">
+                <CardContent className="p-4 text-center">
+                  <div className="flex items-center justify-center mb-2 text-primary">
+                    {stat.icon}
+                  </div>
+                  <div className="text-2xl font-bold text-neon mb-1">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground">{stat.label}</div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
