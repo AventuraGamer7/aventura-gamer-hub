@@ -7,56 +7,33 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Wrench, 
-  Home, 
-  Cpu, 
-  Shield, 
-  Clock,
-  CheckCircle,
-  Star,
-  Target,
-  Gamepad2,
-  Zap,
-  Lock,
-  Settings,
-  Flame,
-  Monitor,
-  HardDrive,
-  Battery
-} from 'lucide-react';
-
+import { Wrench, Home, Cpu, Shield, Clock, CheckCircle, Star, Target, Gamepad2, Zap, Lock, Settings, Flame, Monitor, HardDrive, Battery } from 'lucide-react';
 const Servicios = () => {
   const navigate = useNavigate();
   const [isLoggedIn] = useState(false); // Mock authentication state
-  
-  const controlServices = [
-    {
-      title: 'Problemas de Botones',
-      description: 'Botones que no funcionan o están duros',
-      icon: <Gamepad2 className="h-6 w-6" />,
-      compatible: ['Joy-Con', 'Xbox', 'DualSense'],
-      price: '$25.000 COP',
-      duration: '24h',
-    },
-    {
-      title: 'Puerto de Carga Dañado',
-      description: 'Reparación o cambio de puerto USB-C',
-      icon: <Battery className="h-6 w-6" />,
-      compatible: ['Joy-Con', 'Xbox', 'DualSense'],
-      price: '$35.000 COP',
-      duration: '48h',
-    },
-    {
-      title: 'Carcasa Dañada',
-      description: 'Cambio completo de carcasa',
-      icon: <Shield className="h-6 w-6" />,
-      compatible: ['Joy-Con', 'Xbox', 'DualSense'],
-      price: '$40.000 COP',
-      duration: '24h',
-    },
-  ];
 
+  const controlServices = [{
+    title: 'Problemas de Botones',
+    description: 'Botones que no funcionan o están duros',
+    icon: <Gamepad2 className="h-6 w-6" />,
+    compatible: ['Joy-Con', 'Xbox', 'DualSense'],
+    price: '$25.000 COP',
+    duration: '24h'
+  }, {
+    title: 'Puerto de Carga Dañado',
+    description: 'Reparación o cambio de puerto USB-C',
+    icon: <Battery className="h-6 w-6" />,
+    compatible: ['Joy-Con', 'Xbox', 'DualSense'],
+    price: '$35.000 COP',
+    duration: '48h'
+  }, {
+    title: 'Carcasa Dañada',
+    description: 'Cambio completo de carcasa',
+    icon: <Shield className="h-6 w-6" />,
+    compatible: ['Joy-Con', 'Xbox', 'DualSense'],
+    price: '$40.000 COP',
+    duration: '24h'
+  }];
   const magneticAnalogService = {
     title: 'Cambio a Análogos Magnéticos',
     description: 'Tecnología Hall Effect - Sin drift para siempre',
@@ -64,93 +41,80 @@ const Servicios = () => {
     compatible: ['Xbox', 'DualSense'],
     price: '$120.000 COP',
     duration: '72h',
-    featured: true,
+    featured: true
   };
-
-  const consoleServices = [
-    {
-      title: 'Mantenimientos',
-      description: 'Limpieza interna y cambio de pasta térmica',
-      icon: <Settings className="h-6 w-6" />,
-      price: '$60.000 COP',
-      duration: '24h',
-    },
-    {
-      title: 'Cambios de Fuente',
-      description: 'Reparación de fuente de alimentación',
-      icon: <Zap className="h-6 w-6" />,
-      price: '$90.000 COP',
-      duration: '48h',
-    },
-    {
-      title: 'Consolas que no Encienden',
-      description: 'Diagnóstico y reparación completa',
-      icon: <Cpu className="h-6 w-6" />,
-      price: '$80.000 COP',
-      duration: '2-3 días',
-    },
-    {
-      title: 'Problemas de Lectura',
-      description: 'Reparación de lector de discos',
-      icon: <Monitor className="h-6 w-6" />,
-      price: '$70.000 COP',
-      duration: '48h',
-    },
-    {
-      title: 'Sobrecalentamiento',
-      description: 'Limpieza y reparación del sistema de refrigeración',
-      icon: <Flame className="h-6 w-6" />,
-      price: '$65.000 COP',
-      duration: '24h',
-    },
-    {
-      title: 'Cambio de Pantalla Switch',
-      description: 'Pantalla LCD original Nintendo',
-      icon: <Monitor className="h-6 w-6" />,
-      price: '$150.000 COP',
-      duration: '72h',
-    },
-    {
-      title: 'Reparación de Carga',
-      description: 'Puerto USB-C y circuito de carga',
-      icon: <Battery className="h-6 w-6" />,
-      price: '$55.000 COP',
-      duration: '48h',
-    },
-    {
-      title: 'Cambio de Disco Duro',
-      description: 'Instalación de SSD hasta 2TB',
-      icon: <HardDrive className="h-6 w-6" />,
-      price: '$40.000 COP + disco',
-      duration: '24h',
-    },
-  ];
-
-  const extraServices = [
-    {
-      title: 'Servicio a Domicilio',
-      description: 'Llevamos nuestro servicio técnico hasta tu hogar',
-      icon: <Home className="h-6 w-6" />,
-      price: '+$20.000 COP',
-      duration: 'Costo adicional',
-      note: 'Disponible en Envigado y área metropolitana',
-    },
-    {
-      title: 'Servicio Express (<12h)',
-      description: 'Atención inmediata con prioridad máxima',
-      icon: <Zap className="h-6 w-6" />,
-      price: '+50% recargo',
-      duration: 'Menos de 12h',
-      note: 'Sujeto a disponibilidad y tipo de reparación',
-    },
-  ];
-
+  const consoleServices = [{
+    title: 'Mantenimientos',
+    description: 'Limpieza interna y cambio de pasta térmica',
+    icon: <Settings className="h-6 w-6" />,
+    price: '$60.000 COP',
+    duration: '24h'
+  }, {
+    title: 'Cambios de Fuente',
+    description: 'Reparación de fuente de alimentación',
+    icon: <Zap className="h-6 w-6" />,
+    price: '$90.000 COP',
+    duration: '48h'
+  }, {
+    title: 'Consolas que no Encienden',
+    description: 'Diagnóstico y reparación completa',
+    icon: <Cpu className="h-6 w-6" />,
+    price: '$80.000 COP',
+    duration: '2-3 días'
+  }, {
+    title: 'Problemas de Lectura',
+    description: 'Reparación de lector de discos',
+    icon: <Monitor className="h-6 w-6" />,
+    price: '$70.000 COP',
+    duration: '48h'
+  }, {
+    title: 'Sobrecalentamiento',
+    description: 'Limpieza y reparación del sistema de refrigeración',
+    icon: <Flame className="h-6 w-6" />,
+    price: '$65.000 COP',
+    duration: '24h'
+  }, {
+    title: 'Cambio de Pantalla Switch',
+    description: 'Pantalla LCD original Nintendo',
+    icon: <Monitor className="h-6 w-6" />,
+    price: '$150.000 COP',
+    duration: '72h'
+  }, {
+    title: 'Reparación de Carga',
+    description: 'Puerto USB-C y circuito de carga',
+    icon: <Battery className="h-6 w-6" />,
+    price: '$55.000 COP',
+    duration: '48h'
+  }, {
+    title: 'Cambio de Disco Duro',
+    description: 'Instalación de SSD hasta 2TB',
+    icon: <HardDrive className="h-6 w-6" />,
+    price: '$40.000 COP + disco',
+    duration: '24h'
+  }];
+  const extraServices = [{
+    title: 'Servicio a Domicilio',
+    description: 'Llevamos nuestro servicio técnico hasta tu hogar',
+    icon: <Home className="h-6 w-6" />,
+    price: '+$20.000 COP',
+    duration: 'Costo adicional',
+    note: 'Disponible en Envigado y área metropolitana'
+  }, {
+    title: 'Servicio Express (<12h)',
+    description: 'Atención inmediata con prioridad máxima',
+    icon: <Zap className="h-6 w-6" />,
+    price: '+50% recargo',
+    duration: 'Menos de 12h',
+    note: 'Sujeto a disponibilidad y tipo de reparación'
+  }];
   const handleAcceptMission = (serviceTitle: string) => {
-    navigate('/cursos', { state: { missionTitle: serviceTitle } });
+    navigate('/cursos', {
+      state: {
+        missionTitle: serviceTitle
+      }
+    });
   };
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       <WhatsAppFloat />
       
@@ -174,8 +138,7 @@ const Servicios = () => {
       </section>
 
       {/* Misiones Disponibles */}
-      {isLoggedIn && (
-        <section className="py-16 bg-muted/30">
+      {isLoggedIn && <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
               <Badge variant="secondary" className="bg-secondary/30 text-secondary border-secondary/50 mb-4">
@@ -220,8 +183,7 @@ const Servicios = () => {
               </Card>
             </div>
           </div>
-        </section>
-      )}
+        </section>}
 
       {/* Services Categories */}
       <section className="py-16">
@@ -258,11 +220,9 @@ const Servicios = () => {
                   
                   <CardContent className="space-y-4">
                     <div className="flex flex-wrap gap-2">
-                      {magneticAnalogService.compatible.map((device, idx) => (
-                        <Badge key={idx} variant="outline" className="border-gaming-orange/30 text-gaming-orange">
+                      {magneticAnalogService.compatible.map((device, idx) => <Badge key={idx} variant="outline" className="border-gaming-orange/30 text-gaming-orange">
                           {device}
-                        </Badge>
-                      ))}
+                        </Badge>)}
                     </div>
                     
                     <div className="flex justify-between items-center text-sm">
@@ -280,11 +240,7 @@ const Servicios = () => {
                       <Button variant="gaming" className="flex-1">
                         Solicitar Servicio
                       </Button>
-                      <Button 
-                        variant="gaming-secondary" 
-                        className="flex-1"
-                        onClick={() => handleAcceptMission(magneticAnalogService.title)}
-                      >
+                      <Button variant="gaming-secondary" className="flex-1" onClick={() => handleAcceptMission(magneticAnalogService.title)}>
                         <Target className="mr-2 h-4 w-4" />
                         Aceptar Misión
                       </Button>
@@ -294,8 +250,7 @@ const Servicios = () => {
 
                 {/* Regular Control Services */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {controlServices.map((service, index) => (
-                    <Card key={index} className="card-gaming border-primary/20 glow-hover">
+                  {controlServices.map((service, index) => <Card key={index} className="card-gaming border-primary/20 glow-hover">
                       <CardHeader>
                         <div className="flex items-center gap-3">
                           <div className="p-2 rounded-lg bg-primary/20 text-primary">
@@ -312,11 +267,9 @@ const Servicios = () => {
                       
                       <CardContent className="space-y-4">
                         <div className="flex flex-wrap gap-1">
-                          {service.compatible.map((device, idx) => (
-                            <Badge key={idx} variant="outline" className="border-primary/30 text-primary text-xs">
+                          {service.compatible.map((device, idx) => <Badge key={idx} variant="outline" className="border-primary/30 text-primary text-xs">
                               {device}
-                            </Badge>
-                          ))}
+                            </Badge>)}
                         </div>
                         
                         <div className="flex justify-between items-center text-sm">
@@ -334,24 +287,18 @@ const Servicios = () => {
                           <Button variant="gaming" size="sm" className="flex-1">
                             Solicitar
                           </Button>
-                          <Button 
-                            variant="gaming-secondary" 
-                            size="sm"
-                            onClick={() => handleAcceptMission(service.title)}
-                          >
+                          <Button variant="gaming-secondary" size="sm" onClick={() => handleAcceptMission(service.title)}>
                             <Target className="h-4 w-4" />
                           </Button>
                         </div>
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
               </TabsContent>
               
               <TabsContent value="consolas" className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {consoleServices.map((service, index) => (
-                    <Card key={index} className="card-gaming border-primary/20 glow-hover">
+                  {consoleServices.map((service, index) => <Card key={index} className="card-gaming border-primary/20 glow-hover">
                       <CardHeader>
                         <div className="flex items-center gap-3">
                           <div className="p-2 rounded-lg bg-primary/20 text-primary">
@@ -380,24 +327,18 @@ const Servicios = () => {
                           <Button variant="gaming" size="sm" className="flex-1">
                             Solicitar
                           </Button>
-                          <Button 
-                            variant="gaming-secondary" 
-                            size="sm"
-                            onClick={() => handleAcceptMission(service.title)}
-                          >
+                          <Button variant="gaming-secondary" size="sm" onClick={() => handleAcceptMission(service.title)}>
                             <Target className="h-4 w-4" />
                           </Button>
                         </div>
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
               </TabsContent>
               
               <TabsContent value="extras" className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {extraServices.map((service, index) => (
-                    <Card key={index} className="card-gaming border-secondary/20 glow-hover">
+                  {extraServices.map((service, index) => <Card key={index} className="card-gaming border-secondary/20 glow-hover">
                       <CardHeader>
                         <div className="flex items-center gap-3">
                           <div className="p-3 rounded-lg bg-secondary/20 text-secondary">
@@ -424,18 +365,15 @@ const Servicios = () => {
                           </div>
                         </div>
                         
-                        {service.note && (
-                          <p className="text-xs text-muted-foreground bg-muted/30 p-2 rounded">
+                        {service.note && <p className="text-xs text-muted-foreground bg-muted/30 p-2 rounded">
                             {service.note}
-                          </p>
-                        )}
+                          </p>}
                         
                         <Button variant="gaming" className="w-full">
                           Solicitar Información
                         </Button>
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
               </TabsContent>
             </Tabs>
@@ -523,10 +461,8 @@ const Servicios = () => {
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
                     <Shield className="h-8 w-8 text-primary" />
                   </div>
-                  <h3 className="font-semibold mb-2">6 Meses de Garantía</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Garantía completa en todas nuestras reparaciones por 6 meses
-                  </p>
+                  <h3 className="font-semibold mb-2">Reparaciones garantizadas.</h3>
+                  <p className="text-sm text-muted-foreground">Garantía completa en todas nuestras reparaciones.</p>
                 </CardContent>
               </Card>
 
@@ -559,8 +495,6 @@ const Servicios = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Servicios;
