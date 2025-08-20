@@ -8,89 +8,87 @@ import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import GamificationPanel from '@/components/GamificationPanel';
 import { useAuth } from '@/hooks/useAuth';
-import { 
-  Wrench, 
-  GraduationCap, 
-  ShoppingCart, 
-  Star, 
-  Award, 
-  Zap,
-  ChevronRight,
-  MapPin,
-  Phone,
-  Clock,
-  Users,
-  Trophy,
-  Target
-} from 'lucide-react';
+import { Wrench, GraduationCap, ShoppingCart, Star, Award, Zap, ChevronRight, MapPin, Phone, Clock, Users, Trophy, Target } from 'lucide-react';
 
 // Import images
 import heroImage from '@/assets/gaming-hero.jpg';
 import repairImage from '@/assets/repair-services.jpg';
 import coursesImage from '@/assets/gaming-courses.jpg';
 import storeImage from '@/assets/gaming-store.jpg';
-
 const Index = () => {
-  const { user } = useAuth();
+  const {
+    user
+  } = useAuth();
   const navigate = useNavigate();
-  const services = [
-    {
-      title: 'Servicios Técnicos',
-      description: 'Reparación profesional de consolas y controles, instalación de chips y mantenimientos especializados.',
-      icon: <Wrench className="h-8 w-8" />,
-      image: repairImage,
-      features: ['Reparación en tienda', 'Servicio a domicilio', 'Instalación de chips', 'Mantenimientos'],
-      cta: 'Reparar Ahora',
-      ctaVariant: 'gaming' as const,
-    },
-    {
-      title: 'Cursos Especializados',
-      description: 'Aprende a reparar consolas y controles con nuestros cursos gamificados presenciales y online.',
-      icon: <GraduationCap className="h-8 w-8" />,
-      image: coursesImage,
-      features: ['Cursos presenciales', 'Modalidad online', 'Certificación', 'Contenido gamificado'],
-      cta: 'Inscribirse',
-      ctaVariant: 'gaming-secondary' as const,
-    },
-    {
-      title: 'Tienda de Repuestos',
-      description: 'Repuestos originales, consolas y accesorios gaming. Suscripción mayorista con beneficios exclusivos.',
-      icon: <ShoppingCart className="h-8 w-8" />,
-      image: storeImage,
-      features: ['Repuestos originales', 'Precios mayoristas', 'Suscripción mensual', 'Envíos a domicilio'],
-      cta: 'Comprar',
-      ctaVariant: 'hero' as const,
-    },
-  ];
-
-  const stats = [
-    { label: 'Aventureros Activos', value: '2,500+', icon: <Users className="h-5 w-5" /> },
-    { label: 'Reparaciones Completadas', value: '10,000+', icon: <Wrench className="h-5 w-5" /> },
-    { label: 'Cursos Impartidos', value: '150+', icon: <GraduationCap className="h-5 w-5" /> },
-    { label: 'Años de Experiencia', value: '8+', icon: <Star className="h-5 w-5" /> },
-  ];
-
-  const achievements = [
-    { title: 'Expertos Certificados', description: 'Técnicos especializados con años de experiencia', icon: <Award className="h-6 w-6" /> },
-    { title: 'Garantía Completa', description: 'Garantía en todas nuestras reparaciones y servicios', icon: <Trophy className="h-6 w-6" /> },
-    { title: 'Respuesta Rápida', description: 'Diagnóstico en menos de 24 horas', icon: <Zap className="h-6 w-6" /> },
-    { title: 'Precios Justos', description: 'Tarifas competitivas y transparentes', icon: <Target className="h-6 w-6" /> },
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
+  const services = [{
+    title: 'Servicios Técnicos',
+    description: 'Reparación profesional de consolas y controles, instalación de chips y mantenimientos especializados.',
+    icon: <Wrench className="h-8 w-8" />,
+    image: repairImage,
+    features: ['Reparación en tienda', 'Servicio a domicilio', 'Instalación de chips', 'Mantenimientos'],
+    cta: 'Reparar Ahora',
+    ctaVariant: 'gaming' as const
+  }, {
+    title: 'Cursos Especializados',
+    description: 'Aprende a reparar consolas y controles con nuestros cursos gamificados presenciales y online.',
+    icon: <GraduationCap className="h-8 w-8" />,
+    image: coursesImage,
+    features: ['Cursos presenciales', 'Modalidad online', 'Certificación', 'Contenido gamificado'],
+    cta: 'Inscribirse',
+    ctaVariant: 'gaming-secondary' as const
+  }, {
+    title: 'Tienda de Repuestos',
+    description: 'Repuestos originales, consolas y accesorios gaming. Suscripción mayorista con beneficios exclusivos.',
+    icon: <ShoppingCart className="h-8 w-8" />,
+    image: storeImage,
+    features: ['Repuestos originales', 'Precios mayoristas', 'Suscripción mensual', 'Envíos a domicilio'],
+    cta: 'Comprar',
+    ctaVariant: 'hero' as const
+  }];
+  const stats = [{
+    label: 'Aventureros Activos',
+    value: '2,500+',
+    icon: <Users className="h-5 w-5" />
+  }, {
+    label: 'Reparaciones Completadas',
+    value: '10,000+',
+    icon: <Wrench className="h-5 w-5" />
+  }, {
+    label: 'Cursos Impartidos',
+    value: '150+',
+    icon: <GraduationCap className="h-5 w-5" />
+  }, {
+    label: 'Años de Experiencia',
+    value: '8+',
+    icon: <Star className="h-5 w-5" />
+  }];
+  const achievements = [{
+    title: 'Expertos Certificados',
+    description: 'Técnicos especializados con años de experiencia',
+    icon: <Award className="h-6 w-6" />
+  }, {
+    title: 'Garantía Completa',
+    description: 'Garantía en todas nuestras reparaciones y servicios',
+    icon: <Trophy className="h-6 w-6" />
+  }, {
+    title: 'Respuesta Rápida',
+    description: 'Diagnóstico en menos de 24 horas',
+    icon: <Zap className="h-6 w-6" />
+  }, {
+    title: 'Precios Justos',
+    description: 'Tarifas competitivas y transparentes',
+    icon: <Target className="h-6 w-6" />
+  }];
+  return <div className="min-h-screen bg-background">
       <Header />
       <WhatsAppFloat />
       
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ 
-            backgroundImage: `url(${heroImage})`,
-            filter: 'brightness(0.3)',
-          }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center" style={{
+        backgroundImage: `url(${heroImage})`,
+        filter: 'brightness(0.3)'
+      }} />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-secondary/20" />
         
         <div className="relative container mx-auto px-4">
@@ -128,17 +126,7 @@ const Index = () => {
         {/* Floating Stats */}
         <div className="relative container mx-auto px-4 mt-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {stats.map((stat, index) => (
-              <Card key={index} className="card-gaming border-primary/20 text-center glow-hover">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-center mb-2 text-primary">
-                    {stat.icon}
-                  </div>
-                  <div className="text-2xl font-bold text-neon">{stat.value}</div>
-                  <div className="text-xs text-muted-foreground">{stat.label}</div>
-                </CardContent>
-              </Card>
-            ))}
+            {stats.map((stat, index) => {})}
           </div>
         </div>
       </section>
@@ -159,14 +147,9 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            {services.map((service, index) => (
-              <Card key={index} className="card-gaming border-primary/20 overflow-hidden glow-hover group">
+            {services.map((service, index) => <Card key={index} className="card-gaming border-primary/20 overflow-hidden glow-hover group">
                 <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent" />
                   <div className="absolute bottom-4 left-4 text-primary">
                     {service.icon}
@@ -182,25 +165,20 @@ const Index = () => {
                 
                 <CardContent className="space-y-4">
                   <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-sm">
+                    {service.features.map((feature, idx) => <li key={idx} className="flex items-center gap-2 text-sm">
                         <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                         {feature}
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                   
                   <Button variant={service.ctaVariant} className="w-full" onClick={() => {
-                    if (service.title === 'Servicios Técnicos') navigate('/servicios');
-                    else if (service.title === 'Cursos Especializados') navigate('/cursos');
-                    else if (service.title === 'Tienda de Repuestos') navigate('/tienda');
-                  }}>
+                if (service.title === 'Servicios Técnicos') navigate('/servicios');else if (service.title === 'Cursos Especializados') navigate('/cursos');else if (service.title === 'Tienda de Repuestos') navigate('/tienda');
+              }}>
                     {service.cta}
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -222,15 +200,13 @@ const Index = () => {
               </p>
               
               <div className="grid grid-cols-2 gap-4">
-                {achievements.map((achievement, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-card/50 border border-border/50">
+                {achievements.map((achievement, index) => <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-card/50 border border-border/50">
                     <div className="text-primary">{achievement.icon}</div>
                     <div>
                       <h4 className="font-medium text-sm">{achievement.title}</h4>
                       <p className="text-xs text-muted-foreground">{achievement.description}</p>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
             
@@ -338,8 +314,6 @@ const Index = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
