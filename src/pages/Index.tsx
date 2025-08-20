@@ -97,7 +97,7 @@ const Index = () => {
               🎮 Bienvenido Aventurero
             </Badge>
             
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-glow">
+            <h1 className="text-4xl lg:text-7xl text-glow text-center md:text-6xl font-bold">
               Aventura Gamer
             </h1>
             
@@ -185,9 +185,7 @@ const Index = () => {
               <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30">
                 Sistema Gamificado
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-glow">
-                Sube de Nivel Como un Verdadero Aventurero
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-glow">De APRENDIZ a  AVENTURERO PROFESIONAL</h2>
               <p className="text-lg text-muted-foreground">
                 Gana puntos, desbloquea logros y sube de nivel mientras utilizas nuestros servicios. 
                 Cada reparación, curso completado o compra te acerca más a recompensas exclusivas.
